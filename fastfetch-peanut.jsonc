@@ -1,0 +1,61 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "logo": {
+    "type": "data",
+    "source": "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀$5⢀⣀⠀⠀⠀⠀⠀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀$5⣀⣤⣶⣶⣦⣌⠙⠋$4⢡⣴⣶⡄⠀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀$5⢀⠀⣿⣿$4⣿⡿⢋⣠⣶⣶⡌⠻⣿⠟⠀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀$5⢀⣿⡆$4⠸⠟⢁⣴⣿⣿⣿⣿⣿⡦⠉$3⣴$2⡇\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀$5⢀⣾$4⣿⠟⠀⠰⣿⣿⣿⣿⣿⣿$3⠟⣠$2⡄⠹⠀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀$5⡀⢸$4⡿⢋⣤⣿⣄⠙⣿⣿⡿$3⠟⣡$2⣾⣿⣿⠀⠀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀$5⣠⣴⣾⠿$4⠀⢠⣾⣿⣿⣿$3⣦⠈⠉⢠$2⣾⣿⣿⣿$1⠏⠀⠀\n⠀⠀⠀⠀⠀$5⣀⣤⣦⣄⠙⠋$4⣠⣴⣿⣿⣿⣿$3⠿⠛⢁$2⣴⣦$1⡄⠙⠛⠋⠁⠀⠀⠀\n⠀⠀⠀$5⢀⣾⣿⣿$4⠟⢁⣴⣦⡈⠻⣿⣿$3⡿⠁$2⡀⠚$1⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀⠀⠀$5⠘$4⣿⠟⢁⣴⣿⣿⣿⣿$3⣦⡈⠛⢁$2⣼$1⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀⠀$4⢰⡦⠀⢴⣿⣿⣿⣿⣿$3⣿⣿⠟$2⢀⠘$1⠿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀⠀$4⠘⢀⣶⡀⠻⣿$3⣿⣿⣿$2⡿⠋⣠$1⣿⣷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀⠀⠀$4⢿⣿$3⣿⣦⡈⠻⣿$2⠟⢁⣼$1⣿⣿⠟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀⠀⠀$3⠈$3⠻⣿⣿$2⣿⠖⢀⠐$1⠿⠟⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+    "color": {
+      "1": "@130",
+      "2": "@208",
+      "3": "@172",
+      "4": "@214",
+      "5": "@215"
+    }
+  },
+  "display": {
+    "color": {
+      "title": "@99",
+      "keys": "@105"
+    }
+  },
+  "modules": [
+    "title",
+    {
+      "type": "separator",
+      "outputColor": "@147"
+    },
+    "os",
+    "host",
+    "kernel",
+    "uptime",
+    {
+      "type": "command",
+      "key": "Shell",
+      "text": "getent passwd \"$USER\" | cut -d: -f7"
+    },
+    {
+      "type": "cpu",
+      "temp": true,
+      "format": "{name} ({cores-logical}) @ {freq-max} ({temperature})"
+    },
+    "cpuusage",
+    "memory",
+    {
+      "type": "disk",
+      "format": "{size-used} / {size-total} ({size-percentage})"
+    },
+    {
+      "type": "separator",
+      "outputColor": "@147"
+    },
+    {
+      "type": "command",
+      "key": "Last login",
+      "text": "last -FSwjn1 | jq -r '.entries[0].login'"
+    },
+    {
+      "type": "command",
+      "key": "From",
+      "text": "last -FSwjn1 | jq -r '.entries[0] | if .user == \"reboot\" then \"reboot\" else if .hostname != \"\" then \"\\(.hostname) \" else \"\\(.service | sub(\"\\\\s*(?<s>(\\\\S(.*\\\\S)?))\\\\s*\"; \"\\(.s) \"))\" end + \"(\\(.user))\" end'"
+    }
+  ]
+}
